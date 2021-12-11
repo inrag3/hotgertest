@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class MoveHandler : MonoBehaviour
 {
-    [SerializeField] private Ball _ball;
+    [SerializeField] private Ball _ballPrefab;
     [SerializeField] private Settings _settings;
 
-
+    private Ball _ball;
+    
     private void Awake()
     { 
-        Instantiate(_ball);
+        _ball = Instantiate(_ballPrefab);
+        _ball.Init(_settings);
+    }
+    
+    private void Update()
+    {
+        _ball.Move();
     }
 }

@@ -9,11 +9,21 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D _rigidbody2D;
-    private float _speed;
-    
+
+    public float Speed { get; private set; }
+
     public void Init(IBallSettings ballSettings)
     {
-        _speed = ballSettings.BallSpeed;
+        Speed = ballSettings.BallSpeed;
+    }
+
+    public void IncreaseSpeed(int value)
+    {
+        Speed += value;
+    }
+
+    public void Move()
+    {
+        _rigidbody2D.velocity = new Vector2(Speed*Time.deltaTime,0);
     }
 }
-

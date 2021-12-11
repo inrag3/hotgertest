@@ -10,5 +10,3 @@ public class Settings : ScriptableObject, IComplexity, IBallSettings
     public float BallSpeed => _ballSpeed;
     public Complexity Complexity => _complexity;
 }
-
-
