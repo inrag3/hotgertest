@@ -9,21 +9,33 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D _rigidbody2D;
+    private float _speed;
 
-    public float Speed { get; private set; }
+    public event Action Died;
 
     public void Init(IBallSettings ballSettings)
     {
-        Speed = ballSettings.BallSpeed;
+        _speed = ballSettings.BallSpeed;
     }
 
     public void IncreaseSpeed(int value)
     {
-        Speed += value;
+        _speed += value;
     }
 
-    public void Move()
+    public void MoveHorizontal()
     {
-        _rigidbody2D.velocity = new Vector2(Speed*Time.deltaTime,0);
+        _rigidbody2D.velocity = new Vector2(_speed, 0);
+    }
+
+    public void MoveVertical()
+    {
+        _rigidbody2D.velocity = new Vector2(0, _speed);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.TryGetComponent(out WallSlider wallSlider))
+            Died?.Invoke();
     }
 }

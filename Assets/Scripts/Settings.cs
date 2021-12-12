@@ -2,11 +2,12 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Settings", menuName = "Settings")]
-public class Settings : ScriptableObject, IComplexity, IBallSettings
+public class Settings : ScriptableObject, IBallSettings
 {
     [SerializeField] private float _ballSpeed;
-    [SerializeField] private Complexity _complexity;
-
+    [SerializeField] private float _increaseSpeedTime;
+    [SerializeField] private float _spawnCells;
     public float BallSpeed => _ballSpeed;
-    public Complexity Complexity => _complexity;
+    public float IncreaseSpeedTime => _increaseSpeedTime;
+    public float SpawnCells => _spawnCells;
 }
