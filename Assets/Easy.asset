@@ -15,3 +15,6 @@ MonoBehaviour:
   _ballSpeed: 3
   _increaseSpeedTime: 4
   _spawnCells: 1
+  _spawnFrequency: 0
+  _minHeight: -500
+  _maxHeight: 500

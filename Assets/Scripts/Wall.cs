@@ -3,19 +3,13 @@ using System;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-[RequireComponent(typeof(TilemapCollider2D),typeof(Rigidbody2D))]
-public class Wall : MonoBehaviour
+[RequireComponent(typeof(TilemapCollider2D))]
+public class Wall : Obstacle
 {
-    private TilemapCollider2D _tilemapCollider2D;
-    private Rigidbody2D _rigidbody;
-
-    private void Awake()
+    protected override void Awake()
     {
-        _rigidbody = GetComponent<Rigidbody2D>();
-        _tilemapCollider2D = GetComponent<TilemapCollider2D>();
+        base.Awake();
+        _boxCollider = GetComponent<TilemapCollider2D>();
     }
-    
-    
-    
-    
 }
+

@@ -2,6 +2,8 @@
 using System;
 using UnityEngine;
 
+
+//Наверно можно убрать MonoBehavior, и прокидывать префаб через GameHandler.
 public class BallHandler : MonoBehaviour
 {
     [SerializeField] private Ball _ballPrefab;

@@ -32,10 +32,10 @@ public class Ball : MonoBehaviour
     {
         _rigidbody2D.velocity = new Vector2(0, _speed);
     }
-
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.TryGetComponent(out WallSlider wallSlider))
+        if (other.TryGetComponent(out Obstacle deadly))
             Died?.Invoke();
     }
 }
