@@ -7,14 +7,24 @@ public class GameHandler : MonoBehaviour
     [SerializeField] private UIPresenter _uiView;
     [SerializeField] private ObstacleSpawner _obstacleSpawner;
     [SerializeField] private ObstacleMover _obstacleMover;
+    [SerializeField] private ScoreHandler _scoreHandler;
+    private float _timeInGame;
+    private float _attempts;
     
     private void Awake()
     {
         StopGame();
         _ballHandler.BallDied += OnBallDied;
         _uiView.ClickedUpButton += OnUpClicked;
-        _uiView.ClickedStartButton += OnStartClicked;
+        _uiView.StartClicked += OnStartClicked;
+        _scoreHandler.Received += OnReceived;
         //_obstacleMover.OutOfScreen += OnOutOfScreen;
+    }
+
+    private void OnReceived(float arg1, float arg2)
+    {
+        _timeInGame = arg1;
+        _attempts = arg2;
     }
 
     private void OnStartClicked(Settings settings)
@@ -53,13 +63,14 @@ public class GameHandler : MonoBehaviour
     {
         _ballHandler.BallDied -= OnBallDied;
         _uiView.ClickedUpButton -= OnUpClicked;
-        _uiView.ClickedStartButton -= OnStartClicked;
+        _uiView.StartClicked -= OnStartClicked;
     }
     
     private void OnBallDied()
     {
         StopGame();
-        _uiView.ActiveGameOverScreen();
+        _scoreHandler.ReceiveScore();
+        _uiView.ActiveGameOverScreen(_timeInGame,_attempts);
         _obstacleSpawner.ClearActive();
     }
 }
