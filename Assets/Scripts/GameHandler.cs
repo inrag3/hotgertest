@@ -4,20 +4,42 @@ using UnityEngine;
 public class GameHandler : MonoBehaviour
 {
     [SerializeField] private BallHandler _ballHandler;
-    [SerializeField] private Settings _settings;
     [SerializeField] private UIPresenter _uiView;
     [SerializeField] private ObstacleSpawner _obstacleSpawner;
     [SerializeField] private ObstacleMover _obstacleMover;
-    private void OnEnable()
+    
+    private void Awake()
     {
-        _ballHandler.SpawnBall(_settings);
+        StopGame();
         _ballHandler.BallDied += OnBallDied;
-        _obstacleSpawner.Init(_settings);
-        _uiView.Clicked += OnClicked;
+        _uiView.ClickedUpButton += OnUpClicked;
+        _uiView.ClickedStartButton += OnStartClicked;
         //_obstacleMover.OutOfScreen += OnOutOfScreen;
     }
 
-    private void OnClicked()
+    private void OnStartClicked(Settings settings)
+    {
+        Init(settings);
+    }
+
+    private void Init(Settings settings)
+    {
+        StartGame();
+        _ballHandler.SpawnBall(settings);
+        _obstacleSpawner.Init(settings);
+    }
+
+    private void StartGame()
+    {
+        Time.timeScale = 1;
+    }
+
+    private void StopGame()
+    {
+        Time.timeScale = 0;
+    }
+    
+    private void OnUpClicked()
     {
         _ballHandler.MoveVertical();
     }
@@ -30,11 +52,14 @@ public class GameHandler : MonoBehaviour
     private void OnDisable()
     {
         _ballHandler.BallDied -= OnBallDied;
+        _uiView.ClickedUpButton -= OnUpClicked;
+        _uiView.ClickedStartButton -= OnStartClicked;
     }
     
     private void OnBallDied()
     {
-        Time.timeScale = 0;
-        //_uiView.LoadGameOverScreen();
+        StopGame();
+        _uiView.ActiveGameOverScreen();
+        _obstacleSpawner.ClearActive();
     }
 }

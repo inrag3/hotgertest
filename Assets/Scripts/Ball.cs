@@ -1,14 +1,12 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Rendering;
+
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(CircleCollider2D))]
 public class Ball : MonoBehaviour
 {
-    public  Rigidbody2D Rigidbody2D;
+    public Rigidbody2D Rigidbody2D { get; private set; }
     private float _speed;
 
     public event Action Died;

@@ -10,11 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0421ab80193849ec957857c323e37ed4, type: 3}
-  m_Name: Easy
+  m_Name: Medium
   m_EditorClassIdentifier: 
-  _ballSpeed: 5
-  _increaseSpeedTime: 4
-  _spawnCells: 1
-  _spawnFrequency: 2
-  _minHeight: -3.5
-  _maxHeight: 3.5
+  _ballSpeed: 3
+  _increaseSpeedTime: 10
+  _spawnFrequency: 1
+  _minHeight: -3
+  _maxHeight: 3

@@ -11,12 +11,12 @@ public class BallHandler : MonoBehaviour
 
     public event Action BallDied;
     
-    
     public void SpawnBall(IBallSettings ballSettings)
     {
         _ball = Instantiate(_ballPrefab);
         _ball.Init(ballSettings);
         _ball.Died += OnBallDied;
+        _ball.Rigidbody2D.velocity = Vector2.right;
     }
 
     public void MoveVertical()
@@ -24,9 +24,12 @@ public class BallHandler : MonoBehaviour
         _ball.Rigidbody2D.velocity = Vector2.up * 3f;
     }
     
+    
+    
     private void OnBallDied()
     {
         //Возможно стоило сделать метод Init и прокинуть туда Ивент, появления UI
+        Destroy(_ball.gameObject);
         BallDied?.Invoke();
     }
 }
