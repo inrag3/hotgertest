@@ -10,19 +10,22 @@ public class ObstacleSpawner : MonoBehaviour
 {
     [SerializeField] private Obstacle _obstaclePrefab;
     private Stack<Obstacle> _pool;
+    private List<Obstacle> _activeObstacles; 
     private float _spawnFrequency;
     private Obstacle _obstacle;
     private float _minHeight;
     private float _maxHeight;
-
+    private float _rightBorder;
     public event Action<Obstacle> Spawned;
     
-    public void Init(ISpawnable settings)
+    public void Init(ISpawnable settings, float rightBorder)
     {
         _pool = new Stack<Obstacle>();
+        _activeObstacles = new List<Obstacle>();
         _spawnFrequency = settings.SpawnFrequency;
         _minHeight = settings.MinHeight;
         _maxHeight = settings.MaxHeight;
+        _rightBorder = rightBorder;
         StartCoroutine(Spawn(_spawnFrequency));
     }
     
@@ -48,21 +51,23 @@ public class ObstacleSpawner : MonoBehaviour
                 _obstacle = _pool.Pop();
                 _obstacle.gameObject.SetActive(true);
             }
-            _obstacle.transform.localPosition = new Vector3(10,Random.Range(_minHeight, _maxHeight),0);
+            if (!_activeObstacles.Contains(_obstacle))
+                _activeObstacles.Add(_obstacle);
+            _obstacle.Transform.localPosition = new Vector3(_rightBorder + _obstacle.Collider2D.bounds.size.x ,Random.Range(_minHeight, _maxHeight),0);
         }
     }
 
-    //Нужно вынести в отдельный класс не подходит по логике.
+    //Можно вынести в отдельный класс не подходит по логике (ObstacleSpawner).
     public void ClearActive()
     {
         StopAllCoroutines();
-        // foreach (var x in _activeObstacles)
-        // {
-        //     if (x != null)
-        //     {
-        //         Destroy(x.gameObject);
-        //     }
-        // }
-        // _activeObstacles.Clear();
+        foreach (var x in _activeObstacles)
+        {
+            if (x != null)
+            {
+                Destroy(x.gameObject);
+            }
+        }
+        _activeObstacles.Clear();
     }
 }

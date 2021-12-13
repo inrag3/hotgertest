@@ -2197,7 +2197,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 799603845}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee81dc2de2e54140babe5b2893dd654a, type: 3}
+  m_Script: {fileID: 11500000, guid: 20cf5d0b27a4ee24c865907c3451de91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _easySettings: {fileID: 11400000, guid: ffe86e631b8151d4d9f00a07a95fd785, type: 2}
@@ -3654,9 +3654,8 @@ MonoBehaviour:
   _ballHandler: {fileID: 2064757336}
   _uiView: {fileID: 632227788}
   _obstacleSpawner: {fileID: 1905867458}
-  _obstacleMover: {fileID: -7576058244616555486, guid: 19e857a756a660c4dbccc05e5fb17373, type: 3}
   _scoreHandler: {fileID: 1622273604}
-  _cameraBounds: {fileID: 0}
+  _cameraBounds: {fileID: 519420030}
 --- !u!4 &1251971624
 Transform:
   m_ObjectHideFlags: 0
@@ -4374,7 +4373,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1549637610}
+      - m_Target: {fileID: 799603846}
         m_TargetAssemblyTypeName: DropDownMenu, Assembly-CSharp
         m_MethodName: GetSettings
         m_Mode: 0
@@ -4434,7 +4433,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1549637605}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee81dc2de2e54140babe5b2893dd654a, type: 3}
+  m_Script: {fileID: 11500000, guid: 20cf5d0b27a4ee24c865907c3451de91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _easySettings: {fileID: 11400000, guid: ffe86e631b8151d4d9f00a07a95fd785, type: 2}

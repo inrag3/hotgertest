@@ -17,3 +17,4 @@ MonoBehaviour:
   _spawnFrequency: 0.5
   _minHeight: -3.5
   _maxHeight: 3.5
+  _complexity: 0

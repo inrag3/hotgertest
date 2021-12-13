@@ -30,9 +30,9 @@ public class ObstacleMover : MonoBehaviour
     
     private void Update()
     {
-        //Поставил сюда, потому что после доставания из пула обьектов, не получилось двинуть препятствие.
+        //Поставил сюда, потому что после доставания из пула обьектов, не получилась двинуть препятствие.
         Move();
-        if (_obstacle.Collider2D.transform.position.x < _leftBorder - _obstacle.Collider2D.bounds.size.x)
+        if (_obstacle.Transform.position.x < _leftBorder - _obstacle.Collider2D.bounds.size.x)
         {
             OutOfScreen?.Invoke(this);
         }

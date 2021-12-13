@@ -10,11 +10,12 @@ public class UIPresenter : MonoBehaviour
     [SerializeField] private Button _upButton;
     [SerializeField] private Button _startButton;
     [SerializeField] private DropDownMenu _dropDownMenu;
+    private Settings _currentSettings;
+    
     public event Action<Settings> StartClicked;
     public event Action ClickedUpButton;
     
-    
-    private void Start()
+    private void OnEnable()
     {
         _upButton.onClick.AddListener(OnUpClicked);
         _startButton.onClick.AddListener(OnStartClicked);
@@ -29,7 +30,8 @@ public class UIPresenter : MonoBehaviour
     private void OnStartClicked()
     {
         _startScreen.SetActive(false);
-        StartClicked?.Invoke(_dropDownMenu.Settings);
+        print(_dropDownMenu.GetSettings());
+        StartClicked?.Invoke(_dropDownMenu.GetSettings());
     }
     
     private void OnUpClicked()

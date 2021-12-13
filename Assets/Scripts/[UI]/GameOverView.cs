@@ -14,13 +14,18 @@ public class GameOverView : MonoBehaviour
     {
         _startAgain.onClick.AddListener(OnStartAgainClicked);
     }
-
+    
     private void OnStartAgainClicked()
     {
         gameObject.SetActive(false);
-        ClickedStartButton?.Invoke(_gameDropDownMenu.Settings);
+        ClickedStartButton?.Invoke(_gameDropDownMenu.GetSettings());
     }
 
+    public void SetDropDownValue(Settings settings)
+    {
+        _gameDropDownMenu.SetValue(settings);
+    }
+    
     public void Active(float timeInGame, float attempts)
     {
         _scoreView.UpdateText(timeInGame,attempts);

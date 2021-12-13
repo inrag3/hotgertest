@@ -18,6 +18,7 @@ public class GameHandler : MonoBehaviour
         _ballHandler.BallDied += OnBallDied;
         _uiView.ClickedUpButton += OnUpClicked;
         _uiView.StartClicked += OnStartClicked;
+        
         _scoreHandler.Received += OnReceived;
         _obstacleSpawner.Spawned += OnSpawned;
     }
@@ -51,7 +52,7 @@ public class GameHandler : MonoBehaviour
     {
         StartGame();
         _ballHandler.SpawnBall(settings);
-        _obstacleSpawner.Init(settings);
+        _obstacleSpawner.Init(settings,_cameraBounds.Right);
     }
 
     private void StartGame()
@@ -69,16 +70,13 @@ public class GameHandler : MonoBehaviour
         _ballHandler.MoveVertical();
     }
 
-    // private void OnOutOfScreen(Obstacle obstacle)
-    // {
-    //     _obstacleSpawner.AddToPool(obstacle);
-    // }
-
     private void OnDisable()
     {
         _ballHandler.BallDied -= OnBallDied;
         _uiView.ClickedUpButton -= OnUpClicked;
         _uiView.StartClicked -= OnStartClicked;
+        _scoreHandler.Received -= OnReceived;
+        _obstacleSpawner.Spawned -= OnSpawned;
     }
     
     private void OnBallDied()

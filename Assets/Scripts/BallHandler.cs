@@ -30,7 +30,6 @@ public class BallHandler : MonoBehaviour
         _ball.Rigidbody2D.velocity = Vector2.right * _ball.Speed.x;
     }
     
-    
     //Каждые N секунд горизонтальная скорость шарика должна увеличиваться.
     private IEnumerator IncreaseHorizontalSpeed(float time)
     {
@@ -40,11 +39,9 @@ public class BallHandler : MonoBehaviour
             _ball.Rigidbody2D.velocity += Vector2.right / 10;
         }
     }
-
-
+    
     private void OnBallDied()
     {
-        //Возможно стоило сделать метод Init и прокинуть туда Ивент, появления UI
         Destroy(_ball.gameObject);
         BallDied?.Invoke();
     }

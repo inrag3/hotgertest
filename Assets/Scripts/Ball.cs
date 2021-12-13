@@ -7,7 +7,7 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     public Rigidbody2D Rigidbody2D { get; private set; }
-    public Vector2 Speed { get; set; }
+    public Vector2 Speed { get; private set; }
     public float IncreaseSpeedTime { get; private set; }
 
     public event Action Died;

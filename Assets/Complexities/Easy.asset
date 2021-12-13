@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ballSpeed: {x: 1, y: 3}
   _increaseSpeedTime: 5
-  _spawnFrequency: 2
+  _spawnFrequency: 3
   _minHeight: -2.5
   _maxHeight: 2.5
