@@ -21,7 +21,8 @@ public class DropDownMenu : MonoBehaviour
 
     public void SetValue(Settings settings)
     {
-        GetComponent<Dropdown>().value = (int) settings.Complexity;
+        print((int)settings.Complexity);
+        GetComponent<Dropdown>().value = (int)settings.Complexity;
     }
     
     public Settings GetSettings()

@@ -10,8 +10,7 @@ public class UIPresenter : MonoBehaviour
     [SerializeField] private Button _upButton;
     [SerializeField] private Button _startButton;
     [SerializeField] private DropDownMenu _dropDownMenu;
-    private Settings _currentSettings;
-    
+
     public event Action<Settings> StartClicked;
     public event Action ClickedUpButton;
     
@@ -22,6 +21,9 @@ public class UIPresenter : MonoBehaviour
         _gameOverScreen.ClickedStartButton += OnStartAgainClicked;
     }
 
+    
+    
+    
     private void OnStartAgainClicked(Settings settings)
     {
         StartClicked?.Invoke(settings);
@@ -30,8 +32,8 @@ public class UIPresenter : MonoBehaviour
     private void OnStartClicked()
     {
         _startScreen.SetActive(false);
-        print(_dropDownMenu.GetSettings());
         StartClicked?.Invoke(_dropDownMenu.GetSettings());
+        _gameOverScreen.SetDropDownValue(_dropDownMenu.GetSettings());
     }
     
     private void OnUpClicked()
