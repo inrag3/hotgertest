@@ -23,6 +23,7 @@ public class ScoreHandler : MonoBehaviour
         {
             yield return new WaitForSeconds(1);
             _timeInGame += 1;
+            Debug.Log(_timeInGame);
         }
     }
 
