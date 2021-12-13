@@ -8,7 +8,7 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class Ball : MonoBehaviour
 {
-    [SerializeField] private Rigidbody2D _rigidbody2D;
+    public  Rigidbody2D Rigidbody2D;
     private float _speed;
 
     public event Action Died;
@@ -16,23 +16,9 @@ public class Ball : MonoBehaviour
     public void Init(IBallSettings ballSettings)
     {
         _speed = ballSettings.BallSpeed;
+        Rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
-    public void IncreaseSpeed(int value)
-    {
-        _speed += value;
-    }
-
-    public void MoveHorizontal()
-    {
-        _rigidbody2D.velocity = new Vector2(_speed, 0);
-    }
-
-    public void MoveVertical()
-    {
-        _rigidbody2D.velocity = new Vector2(0, _speed);
-    }
-    
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.TryGetComponent(out Obstacle deadly))

@@ -1,5 +1,7 @@
 ﻿
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ObstacleSpawner : MonoBehaviour
@@ -10,20 +12,37 @@ public class ObstacleSpawner : MonoBehaviour
     private Obstacle _obstacle;
     private float _minHeight;
     private float _maxHeight;
-    
+
     public void Init(ISpawnable settings)
     {
+        _pool = new List<Obstacle>();
         _spawnFrequency = settings.SpawnFrequency;
         _minHeight = settings.MinHeight;
         _maxHeight = settings.MaxHeight;
     }
-
     
-    //Можно было бы реализовать с помощью корутины.
-    private void Update()
+    private void Start()
     {
-        _obstacle = Instantiate(_obstaclePrefab);
-        _obstacle.transform.position = new Vector2(500,Random.Range(_minHeight, _maxHeight));
+        StartCoroutine(Spawn(_spawnFrequency));
     }
+    
+    public void AddToPool(Obstacle obstacle)
+    {
+        obstacle.gameObject.SetActive(false);
+        _pool.Add(obstacle);
+    }
+
+    private IEnumerator Spawn(float time)
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(time);
+            if (_pool.Count == 0)
+                _obstacle = Instantiate(_obstaclePrefab);
+            else _obstacle = _pool.First();
+            _obstacle.transform.position = new Vector3(10,Random.Range(_minHeight, _maxHeight),0);
+        }
+    }
+    
     
 }

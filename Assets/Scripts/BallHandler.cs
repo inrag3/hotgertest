@@ -17,9 +17,13 @@ public class BallHandler : MonoBehaviour
         _ball = Instantiate(_ballPrefab);
         _ball.Init(ballSettings);
         _ball.Died += OnBallDied;
-        _ball.MoveHorizontal();
     }
 
+    public void MoveVertical()
+    {
+        _ball.Rigidbody2D.velocity = Vector2.up * 3f;
+    }
+    
     private void OnBallDied()
     {
         //Возможно стоило сделать метод Init и прокинуть туда Ивент, появления UI

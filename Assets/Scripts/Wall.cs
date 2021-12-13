@@ -9,7 +9,7 @@ public class Wall : Obstacle
     protected override void Awake()
     {
         base.Awake();
-        _boxCollider = GetComponent<TilemapCollider2D>();
+        _collider = GetComponent<TilemapCollider2D>();
     }
 }
 
