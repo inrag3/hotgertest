@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0421ab80193849ec957857c323e37ed4, type: 3}
   m_Name: Easy
   m_EditorClassIdentifier: 
-  _ballSpeed: 2
-  _increaseSpeedTime: 15
+  _ballSpeed: {x: 1, y: 3}
+  _increaseSpeedTime: 5
   _spawnFrequency: 2
   _minHeight: -2.5
   _maxHeight: 2.5

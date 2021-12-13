@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0421ab80193849ec957857c323e37ed4, type: 3}
   m_Name: Hard
   m_EditorClassIdentifier: 
-  _ballSpeed: 5
-  _increaseSpeedTime: 7
+  _ballSpeed: {x: 3, y: 3}
+  _increaseSpeedTime: 2
   _spawnFrequency: 0.5
   _minHeight: -3.5
   _maxHeight: 3.5

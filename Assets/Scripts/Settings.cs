@@ -4,13 +4,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Settings", menuName = "Settings")]
 public class Settings : ScriptableObject, IBallSettings, ISpawnable
 {
-    [SerializeField] private float _ballSpeed;
+    [SerializeField] private Vector2 _ballSpeed;
     [SerializeField] private float _increaseSpeedTime;
     [SerializeField] private float _spawnFrequency;
     [SerializeField] [Range(-3.5f,3.5f)] private float _minHeight;
     [SerializeField] [Range(-3.5f,3.5f)] private float _maxHeight;
-    
-    public float BallSpeed => _ballSpeed;
+    public Vector2 BallSpeed => _ballSpeed;
     public float IncreaseSpeedTime => _increaseSpeedTime;
     public float SpawnFrequency => _spawnFrequency;
     

@@ -6,8 +6,9 @@ public class GameHandler : MonoBehaviour
     [SerializeField] private BallHandler _ballHandler;
     [SerializeField] private UIPresenter _uiView;
     [SerializeField] private ObstacleSpawner _obstacleSpawner;
-    [SerializeField] private ObstacleMover _obstacleMover;
     [SerializeField] private ScoreHandler _scoreHandler;
+    [SerializeField] private CameraBounds _cameraBounds;
+    
     private float _timeInGame;
     private float _attempts;
     
@@ -18,9 +19,23 @@ public class GameHandler : MonoBehaviour
         _uiView.ClickedUpButton += OnUpClicked;
         _uiView.StartClicked += OnStartClicked;
         _scoreHandler.Received += OnReceived;
-        //_obstacleMover.OutOfScreen += OnOutOfScreen;
+        _obstacleSpawner.Spawned += OnSpawned;
     }
 
+    private void OnSpawned(Obstacle obj)
+    {
+        var obstacleMover = obj.GetComponent<ObstacleMover>();
+        obstacleMover.Init(_cameraBounds.Left,_cameraBounds.Right);
+        obstacleMover.OutOfScreen += OnOutOfScreen;
+    }
+
+    private void OnOutOfScreen(ObstacleMover obj)
+    {
+        var obstacle = obj.GetComponent<Obstacle>();
+        obstacle.gameObject.SetActive(false);
+        _obstacleSpawner.AddToPool(obstacle);
+    }
+    
     private void OnReceived(float arg1, float arg2)
     {
         _timeInGame = arg1;

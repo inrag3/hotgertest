@@ -3,26 +3,38 @@ using System;
 
 using UnityEngine;
 
-
 [RequireComponent(typeof(Obstacle))]
 public class ObstacleMover : MonoBehaviour
 {
     private Obstacle _obstacle;
 
-    //public event Action<Obstacle> OutOfScreen;
+    private float _leftBorder;
     
-    private void Awake()
+    public event Action<ObstacleMover> OutOfScreen;
+    
+    public void Init(float leftBorder, float rightBorder)
     {
-        _obstacle = GetComponent<Obstacle>();
-        _obstacle.Rigidbody2D.velocity = Vector2.left * 5f;
+        _leftBorder = leftBorder;
     }
 
+    private void Awake()
+    {
+        _obstacle = gameObject.GetComponent<Obstacle>();
+        Move();
+    }
+
+    public void Move()
+    {
+        _obstacle.Rigidbody2D.velocity = Vector2.left * 5f;
+    }
+    
     private void Update()
     {
-        if (_obstacle.Collider2D.transform.position.x < -10f)
+        //Поставил сюда, потому что после доставания из пула обьектов, не получилось двинуть препятствие.
+        Move();
+        if (_obstacle.Collider2D.transform.position.x < _leftBorder - _obstacle.Collider2D.bounds.size.x)
         {
-            Destroy(_obstacle.gameObject);
-            //OutOfScreen?.Invoke(_obstacle);
+            OutOfScreen?.Invoke(this);
         }
     }
 }

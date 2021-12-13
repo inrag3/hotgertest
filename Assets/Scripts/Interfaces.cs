@@ -1,4 +1,7 @@
-﻿public interface IBallSettings
+﻿using UnityEngine;
+
+public interface IBallSettings
 {
-    public float BallSpeed { get; }
+    public Vector2 BallSpeed { get; }
+    public float IncreaseSpeedTime { get; }
 }

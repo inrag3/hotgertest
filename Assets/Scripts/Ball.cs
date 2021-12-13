@@ -7,13 +7,15 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     public Rigidbody2D Rigidbody2D { get; private set; }
-    private float _speed;
+    public Vector2 Speed { get; set; }
+    public float IncreaseSpeedTime { get; private set; }
 
     public event Action Died;
 
     public void Init(IBallSettings ballSettings)
     {
-        _speed = ballSettings.BallSpeed;
+        Speed = ballSettings.BallSpeed;
+        IncreaseSpeedTime = ballSettings.IncreaseSpeedTime;
         Rigidbody2D = GetComponent<Rigidbody2D>();
     }
 

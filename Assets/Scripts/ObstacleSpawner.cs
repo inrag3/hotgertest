@@ -9,35 +9,46 @@ using Random = UnityEngine.Random;
 public class ObstacleSpawner : MonoBehaviour
 {
     [SerializeField] private Obstacle _obstaclePrefab;
-    private List<Obstacle> _activeObstacles;
+    private Stack<Obstacle> _pool;
     private float _spawnFrequency;
     private Obstacle _obstacle;
     private float _minHeight;
     private float _maxHeight;
 
+    public event Action<Obstacle> Spawned;
+    
     public void Init(ISpawnable settings)
     {
-        _activeObstacles = new List<Obstacle>();
+        _pool = new Stack<Obstacle>();
         _spawnFrequency = settings.SpawnFrequency;
         _minHeight = settings.MinHeight;
         _maxHeight = settings.MaxHeight;
         StartCoroutine(Spawn(_spawnFrequency));
     }
     
-    // public void AddToPool(Obstacle obstacle)
-    // {
-    //     obstacle.gameObject.SetActive(false);
-    //     _pool.Add(obstacle);
-    // }
-
+    public void AddToPool(Obstacle obstacle)
+    {
+        obstacle.gameObject.SetActive(false);
+        _pool.Push(obstacle);
+    }
+    
     private IEnumerator Spawn(float time)
     {
+       
         while (true)
         {
             yield return new WaitForSeconds(time);
-            _obstacle = Instantiate(_obstaclePrefab);
-            _activeObstacles.Add(_obstacle);
-            _obstacle.transform.position = new Vector3(10,Random.Range(_minHeight, _maxHeight),0);
+            if (_pool.Count == 0)
+            {
+                _obstacle = Instantiate(_obstaclePrefab);
+                Spawned?.Invoke(_obstacle);
+            }
+            else
+            {
+                _obstacle = _pool.Pop();
+                _obstacle.gameObject.SetActive(true);
+            }
+            _obstacle.transform.localPosition = new Vector3(10,Random.Range(_minHeight, _maxHeight),0);
         }
     }
 
@@ -45,13 +56,13 @@ public class ObstacleSpawner : MonoBehaviour
     public void ClearActive()
     {
         StopAllCoroutines();
-        foreach (var x in _activeObstacles)
-        {
-            if (x != null)
-            {
-                Destroy(x.gameObject);
-            }
-        }
-        _activeObstacles.Clear();
+        // foreach (var x in _activeObstacles)
+        // {
+        //     if (x != null)
+        //     {
+        //         Destroy(x.gameObject);
+        //     }
+        // }
+        // _activeObstacles.Clear();
     }
 }
